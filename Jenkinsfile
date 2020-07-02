@@ -9,16 +9,16 @@ pipeline {
    stages {
       stage('scm checkout') {
          steps {
-            // Get code from a GitHub repository
+      // Get code from a GitHub repository
 	    echo 'retrieving code form scm'
-            git 'https://github.com/chine-imo/WAIP.git'
+            git 'https://github.com/chine-imo/WAIP2.git'
 	    echo 'code retrivial from scm complete'
          }
       }
 
    stage('initialize tf') {
          steps {
-            // initialize configuration files in working diectory
+      // initialize configuration files in working diectory
 	    echo 'initializing working directory'
             sh 'terraform init'
 	    echo 'initialization complete'
@@ -27,7 +27,7 @@ pipeline {
 
       stage('validate tf') {
          steps {
-            // validates the configuration files in a directory
+      // validates the configuration files in a directory
 	    echo 'validating terraform config files'
             sh 'terraform validate'
 	    echo 'validation complete'
@@ -36,7 +36,7 @@ pipeline {
 
       stage('plan tf') {
          steps {
-            // create terraform execution plan
+      // create terraform execution plan
 	    echo 'runnign terraform plan'
             sh 'terraform plan'
 	    echo 'planning complete'
@@ -45,13 +45,11 @@ pipeline {
 
       stage('apply tf') {
          steps {
-            // validates the configuration files in a directory
+      // validates the configuration files in a directory
 	    echo 'applying terraform config to environment' 
             sh 'terraform apply -auto-approve'
 	    echo 'deployment complete'
          }
-      }
-
-      
+      }      
    }
 }

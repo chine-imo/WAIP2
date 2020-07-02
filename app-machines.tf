@@ -7,11 +7,6 @@ resource "aws_instance" "app_machine" {
   subnet_id              = element(local.subs_pri, count.index + 1)
   vpc_security_group_ids = local.sec_groups_pub2
 
-  # remove after setup and restore above subnet and sec grp
-  #ubnet_id              = aws_subnet.public_2.id
-  #vpc_security_group_ids = local.sec_groups_pub1
-  
-
   /*tags = {
     Name = element(var.instance_name, count.index + 1)
   }*/
