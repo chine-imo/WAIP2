@@ -1,0 +1,21 @@
+node {
+   def mvnHome
+   stage('scm checkout') { 
+      // Get some code from a GitHub repository
+      git 'https://github.com/chine-imo/WAIP.git'
+   }
+   
+   stage('initialize tf') {
+      withEnv(["MVN_HOME=$mvnHome"]) {
+         if (isUnix()) {
+            sh 'terraform init'
+         } else {
+            bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+         }
+      }
+   }
+   stage('Results') {
+      junit '**/target/surefire-reports/TEST-*.xml'
+      archiveArtifacts 'target/*.jar'
+   }
+}

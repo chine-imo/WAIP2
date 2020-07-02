@@ -1,0 +1,3 @@
+test hook trigger 1
+test hook trigger 2
+test hook trigger 3

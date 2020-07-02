@@ -6,6 +6,8 @@ resource "aws_instance" "jenkins" {
   subnet_id              = aws_subnet.public_1.id
   vpc_security_group_ids = local.sec_groups_pub
 
+
+
   tags = {
     Name = "weather-jenkins"
   }
@@ -42,7 +44,7 @@ resource "aws_instance" "jenkins" {
       "sudo echo 'export PATH=/usr/bin/terraform:$PATH' >> ~/.bashrc",
       "sudo systemctl enable jenkins",
       "sudo systemctl start jenkins",
-      "sudo mkdir chine_provisioner.txt"
+      "sudo mkdir chine_provisioner1.txt"
     ]
 
   }*/
