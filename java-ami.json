@@ -1,0 +1,38 @@
+{
+    "variables": {
+      "instance_size": "t2.micro",
+      "ami_name": "java-packed-ami",
+      "base_ami": "ami-032598fcc7e9d1c7a",
+      "aws_access_key": "",
+      "aws_secret_key": "",
+      "ssh_username": "ec2-user"
+    },
+    "builders": [
+      {
+        "type": "amazon-ebs",
+        "region": "eu-west-2",
+        "source_ami": "{{user `base_ami`}}",
+        "access_key": "{{user `aws_access_key`}}",
+        "secret_key": "{{user `aws_secret_key`}}",
+        "instance_type": "{{user `instance_size`}}",
+        "ssh_username": "{{user `ssh_username`}}",
+        "ami_name": "{{user `ami_name`}}",
+        "ssh_pty": "true",
+        "tags": {
+          "Name": "java",
+          "BuiltBy": "Packer"
+        }
+      }
+    ],
+      "provisioners": [
+          {
+              "type": "shell",
+              "inline": [
+                "sudo yum update -y",
+                "sudo yum install -y java-1.8.0-openjdk-devel",
+                "sudo echo 'export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.252.b09-2.amzn2.0.1.x86_64/' >> ~/.bashrc",
+                "sudo echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc"
+              ]
+          }
+      ]
+    }

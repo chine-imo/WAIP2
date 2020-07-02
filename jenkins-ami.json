@@ -1,0 +1,58 @@
+
+    {
+        "variables": {
+        "instance_size": "t2.micro",
+        "ami_name": "jenkins-packed-ami",
+        "base_ami": "ami-032598fcc7e9d1c7a",
+        "aws_access_key": "",
+        "aws_secret_key": "",
+        "ssh_username": "ec2-user"
+      },
+      "builders": [
+        {
+          "type": "amazon-ebs",
+          "region": "eu-west-2",
+          "source_ami": "{{user `base_ami`}}",
+          "access_key": "{{user `aws_access_key`}}",
+          "secret_key": "{{user `aws_secret_key`}}",
+          "instance_type": "{{user `instance_size`}}",
+          "ssh_username": "{{user `ssh_username`}}",
+          "ami_name": "{{user `ami_name`}}",
+          "ssh_pty": "true",
+          "tags": {
+            "Name": "Jenkins",
+            "BuiltBy": "Packer"
+          }
+        }
+      ],
+      "description": "AWS Image",
+      "provisioners": [
+          {
+              "type": "shell",
+              "inline": [
+                "sudo yum update -y",
+                "sudo yum install -y git",
+                "sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key",
+                "sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo",
+		            "sudo yum upgrade -y",
+                "sudo yum install -y java-1.8.0-openjdk-devel",
+                "wget https://www.mirrorservice.org/sites/ftp.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz",
+                "sudo mkdir /opt/Maven",
+                "sudo tar -xzvf apache-maven-3.6.3-bin.tar.gz --directory /opt/Maven",
+                "sudo echo 'export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.252.b09-2.amzn2.0.1.x86_64' >> ~/.bashrc",
+                "sudo echo 'export M2_HOME=/opt/Maven/apache-maven-3.6.3' >> ~/.bashrc",
+                "sudo echo 'export MAVEN_HOME=/opt/Maven/apache-maven-3.6.3' >> ~/.bashrc",
+                "sudo echo 'export PATH=$MAVEN_HOME/bin:$PATH' >> ~/.bashrc",
+                "sudo echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc",
+                "sudo yum install -y jenkins",
+                "wget https://releases.hashicorp.com/packer/1.6.0/packer_1.6.0_linux_amd64.zip",
+                "sudo unzip packer_1.6.0_linux_amd64.zip -d /usr/bin",
+                "sudo echo 'export PATH=/usr/bin/packer:$PATH' >> ~/.bashrc",
+                "wget https://releases.hashicorp.com/terraform/0.12.26/terraform_0.12.26_linux_amd64.zip",
+                "sudo unzip terraform_0.12.26_linux_amd64.zip -d /usr/bin",
+                "sudo echo 'export PATH=/usr/bin/terraform:$PATH' >> ~/.bashrc"
+                
+              ]
+          }
+      ]
+    }
