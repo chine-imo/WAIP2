@@ -1,6 +1,6 @@
 resource "aws_instance" "app_machine" {
-  #ami                    = data.aws_ami.java_packer_image.id
-  ami                    = var.app-server-ami
+  ami                    = data.aws_ami.java_packer_image.id
+  #ami                    = var.app-server-ami
   instance_type          = "t2.micro"
   key_name               = var.key_name
   count                  = length(var.instance_names)
