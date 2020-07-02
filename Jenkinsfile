@@ -19,8 +19,7 @@ pipeline {
       stage('initialize tf') {
          steps {
 	         echo 'initializing working directory'
-            sh 'terraform init'
-            
+            sh 'terraform init'            
 	         echo 'initialization complete'
          }
       }
