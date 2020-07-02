@@ -20,6 +20,7 @@ pipeline {
          steps {
 	         echo 'initializing working directory'
             sh 'terraform init'
+            
 	         echo 'initialization complete'
          }
       }
