@@ -22,6 +22,7 @@ wget https://releases.hashicorp.com/terraform/0.12.26/terraform_0.12.26_linux_am
 sudo unzip terraform_0.12.26_linux_amd64.zip -d /usr/bin
 sudo echo 'export PATH=/usr/bin/terraform:$PATH' >> ~/.bashrc
 source .bashrc
+usermod --shell /bin/bash jenkins
 sudo systemctl enable jenkins
 sudo systemctl start jenkins
 sudo mkdir chine_provisioner.txt
