@@ -1,4 +1,4 @@
-﻿#! /bin/bash
+﻿#!/bin/bash
 #Filename: setup.sh
 #Description: installs required programs and dependendies
 
