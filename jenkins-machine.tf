@@ -5,7 +5,7 @@ resource "aws_instance" "jenkins" {
   key_name               = var.key_name
   subnet_id              = aws_subnet.public_1.id
   vpc_security_group_ids = local.sec_groups_pub
-  user_data              = file("jenkins-setup.sh")
+  
 
   tags = {
     Name = "weather-jenkins"
