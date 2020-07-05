@@ -95,7 +95,7 @@ output "app_server_id" {
   value = {
     
     for instance in aws_instance.app_machine:
-    [instance.tags.Name] => [instance.private_ip]
+    instance.tags.Name => instance.private_ip
     
   }
 }
