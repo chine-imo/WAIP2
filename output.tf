@@ -76,7 +76,7 @@ output "app_server_TagName" {
 
 # app server private ip
 output "app_server_private_ips" {
-  value = aws_instance.app_machine.*.private_ip
+  value = [aws_instance.app_machine.*.private_ip]
 }
 
 output "app_machines_private_ips" {
@@ -91,9 +91,12 @@ output "app_machines_private_ips" {
 
 
 output "app_server_id" {
+  
   value = {
+    
     for instance in aws_instance.app_machine:
-    instance.tags.Name => instance.private_ip
+    [instance.tags.Name] => [instance.private_ip]
+    
   }
 }
 
@@ -102,7 +105,9 @@ output "app_server_id" {
 
 
 
-#output "app_machine_" { value = ["${aws_instance.app_machine.*.tags.Name}","${aws_instance.app_machine.*.public_ip}"] }
+/*output "app_machine_" { 
+  value = ["${aws_instance.app_machine.*.tags.Name}","${aws_instance.app_machine.*.public_ip}"] 
+  }*/
 
 
 /*output "jenkins_node_endpoint" {
@@ -110,3 +115,26 @@ output "app_server_id" {
 }*/
 
 # https://medium.com/hashicorp-engineering/introduction-a9c8530ce482
+#terraform output -json app_server_id | jq '."Blue-Box"'
+#terraform output -json app_server_id | jq '.["Blue-Box"]' --raw-output
+##terraform output -json app_server_id | jq '.[]' --raw-output
+
+
+#test
+##terraform output -json app_server_id | jq '.[] | tonumber'
+#sudo scp -i ~/.ssh/terraform2.pem /var/lib/jenkins/TEST2.doc ec2-user@$($BLUE_BOX_IP | jq '."Blue-Box"' --raw-output):/home/ec2-user
+
+
+#environment variable
+#BLUE_BOX_IP
+#terraform output -json app_server_id
+
+#EXECUTE SHELL
+#sudo scp -i ~/.ssh/terraform2.pem /var/lib/jenkins/TEST2.doc ec2-user@$($BLUE_BOX_IP | jq '."Blue-Box"' --raw-output):/home/ec2-user
+#terraform init
+#$JENKINS_PUB_IP
+#$RED_BOX_IP | jq '."Red-Box"' --raw-output
+#$BLUE_BOX_IP | jq '."Blue-Box"' --raw-output
+#$BLUE_BOX_IP  | jq '."Blue-Box"' --raw-output
+#pwd
+
