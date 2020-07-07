@@ -90,7 +90,7 @@ output "app_machines_private_ips" {
 }
 
 
-output "app_server_id" {
+output "app_server_ips" {
   
   value = {
     
