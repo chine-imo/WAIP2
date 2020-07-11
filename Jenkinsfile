@@ -52,6 +52,7 @@ pipeline {
             sh 'terraform apply -auto-approve'
 	         echo 'deployment complete'
          }
-      }      
+      }
+
    }
 }
