@@ -1,6 +1,6 @@
 resource "aws_instance" "nginx" {
-  #ami                    = data.aws_ami.nginx_packer_image.id
-  ami                    = var.proxy-server-ami
+  ami                    = data.aws_ami.nginx_packer_image.id
+  #ami                    = var.proxy-server-ami
   instance_type          = "t2.micro"
   key_name               = var.key_name
   subnet_id              = aws_subnet.public_2.id
