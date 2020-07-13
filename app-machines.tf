@@ -15,6 +15,22 @@ resource "aws_instance" "app_machine" {
     Name = var.instance_names[count.index]
   }
 
+    connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = file(var.private_key)
+    host        = self.public_ip
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo yum update -y",
+      "sudo useradd -d /var/lib/jenkins jenkins",
+      "sudo usermod -aG wheel jenkins",
+      "sudo usermod --shell /bin/bash jenkins"      
+    ]
+  }
+
 
 
 }
