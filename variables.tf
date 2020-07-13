@@ -45,9 +45,9 @@ variable "public-subnet_3-cidr" {
   description = "public-subnet_3-cidr"
 }
 
-variable "public-subnet_3-cidr" {
+variable "public-subnet_4-cidr" {
   default     = "172.28.32.0/24"
-  description = "private-subnet_2-cidr"
+  description = "public-subnet_4-cidr"
 }
 
 variable "instance_names" {

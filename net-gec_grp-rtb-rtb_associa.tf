@@ -73,12 +73,12 @@ resource "aws_route_table_association" "route-B-pub" {
 }
 
 resource "aws_route_table_association" "route-C-pub" {
-  subnet_id      = aws_subnet.public_3.subnet_id
+  subnet_id      = aws_subnet.public_3.id
   route_table_id = aws_route_table.routetb_A_public.id
 }
 
 resource "aws_route_table_association" "route-D-pub" {
-  subnet_id      = aws_subnet.public_4.subnet_id
+  subnet_id      = aws_subnet.public_4.id
   route_table_id = aws_route_table.routetb_A_public.id
 }
 

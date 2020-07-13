@@ -75,11 +75,11 @@ output "app_server_TagName" {
 }
 
 # app server private ip
-output "app_server_private_ips" {
+output "app_server_private_ips1" {
   value = [aws_instance.app_machine.*.private_ip]
 }
 
-output "app_machines_private_ips" {
+output "app_machines_private_ips2" {
   value = "${
     formatlist(
       "%s:%s",
@@ -90,7 +90,7 @@ output "app_machines_private_ips" {
 }
 
 
-output "app_server_private_ips" {
+output "app_server_private_ips3" {
 
   value = {
 
@@ -100,7 +100,7 @@ output "app_server_private_ips" {
   }
 }
 
-output "app_server_public_ips" {
+output "app_server_public_ips4" {
 
   value = {
 
