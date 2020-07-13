@@ -27,7 +27,7 @@ pipeline {
 
       stage("set-instance-ips") {
          steps {
-             echo CURRENT_LIVE_BOX
+             //echo CURRENT_LIVE_BOX
              sh '''
              terraform output proxy_server_private_ip > /var/lib/jenkins/env_vars/Nginx_Box_ip.txt
              terraform output -json app_server_ips | jq '.["Blue-Box"]' --raw-output > /var/lib/jenkins/env_vars/Blue_Box_ip.txt                
