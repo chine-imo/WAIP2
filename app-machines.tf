@@ -1,6 +1,6 @@
 resource "aws_instance" "app_machine" {
-  ami = data.aws_ami.java_packer_image.id
-  #ami                    = var.app-server-ami
+  #ami = data.aws_ami.java_packer_image.id
+  ami                    = var.app-server-ami
   instance_type          = "t2.micro"
   key_name               = var.key_name
   count                  = length(var.instance_names)
@@ -25,6 +25,9 @@ resource "aws_instance" "app_machine" {
   provisioner "remote-exec" {
     inline = [
       "sudo yum update -y",
+      "sudo yum install -y java-1.8.0-openjdk-devel",
+      "sudo echo 'export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.252.b09-2.amzn2.0.1.x86_64/' >> ~/.bashrc",
+      "sudo echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc",
       "sudo useradd -d /var/lib/jenkins jenkins",
       "sudo usermod -aG wheel jenkins",
       "sudo usermod --shell /bin/bash jenkins"      
