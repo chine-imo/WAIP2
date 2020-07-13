@@ -1,0 +1,41 @@
+pipeline {
+   agent any
+
+   environment {
+            AWS_ACCESS_KEY_ID     = credentials ('AWS_ACCESS_KEY_ID')
+            AWS_SECRET_ACCESS_KEY = credentials ('AWS_SECRET_ACCESS_KEY')
+            
+        }
+     
+      // Get code from a GitHub repository //
+   stages {
+      stage('scm checkout') {
+         steps {
+	         echo 'retrieving code form scm'
+            git 'https://github.com/chine-imo/WAIP2.git'
+	         echo 'code retrivial from scm complete'
+         }
+      }
+      // initialize configuration files in working diectory //
+      stage('initialize tf') {
+         steps {
+	         echo 'initializing working directory'
+            sh 'terraform init'            
+	         echo 'initialization complete'
+         }
+      }
+
+      stage("set-instance-ips") {
+         steps {
+             echo CURRENT_LIVE_BOX
+             sh '''
+             terraform output /var/lib/jenkins/env_vars/Nginx_Box.txt
+             terraform output -json app_server_ips | jq '.["Blue-Box"]' --raw-output > /var/lib/jenkins/env_vars/Blue_Box.txt                
+             terraform output -json app_server_ips | jq '.["Red-Box"]' --raw-output > /var/lib/jenkins/env_vars/Red_Box.txt
+             terraform output -json app_server_ips | jq '.["Red-Box"]' --raw-output > /var/lib/jenkins/env_vars/Nginx_Box.txt               
+             '''
+         }
+      }      
+
+   }
+}
