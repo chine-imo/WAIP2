@@ -4,7 +4,7 @@ pipeline {
    environment {
             AWS_ACCESS_KEY_ID     = credentials ('AWS_ACCESS_KEY_ID')
             AWS_SECRET_ACCESS_KEY = credentials ('AWS_SECRET_ACCESS_KEY')
-            CURRENT_LIVE_BOX = 'Not Set'
+            //CURRENT_LIVE_BOX = 'Not Set'
         }
      
       // Get code from a GitHub repository //
@@ -54,7 +54,7 @@ pipeline {
 
       stage("Write-File") {
          steps {
-             echo CURRENT_LIVE_BOX
+             //echo CURRENT_LIVE_BOX
                 script {
                     writeFile(file:'/var/lib/jenkins/env_vars/Live_Box.txt', text: 'No-Box')
                     writeFile(file:'/var/lib/jenkins/env_vars/Red_Box_ip.txt', text: 'Red-IP')
