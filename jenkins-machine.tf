@@ -41,7 +41,7 @@ resource "aws_instance" "jenkins" {
        "sudo echo 'export PATH=/usr/bin/terraform:$PATH' >> ~/.bashrc",
        "source ~/.bashrc",
        "sudo mkdir /var/lib/jenkins/env_vars",
-       //"sudo chown jenkins:jenkins /var/lib/jenkins/env_vars" 
+       "sudo chown jenkins:jenkins /var/lib/jenkins/env_vars" 
        "sudo usermod --shell /bin/bash jenkins",
        "sudo usermod -aG wheel jenkins",
        "sudo systemctl enable jenkins",
