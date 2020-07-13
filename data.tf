@@ -27,7 +27,7 @@ data "aws_ami" "nginx_packer_image" {
 
 }*/
 
-data "aws_ami" "java_packer_image" {
+/*data "aws_ami" "java_packer_image" {
   most_recent = true
   filter {
     name   = "name"
@@ -40,4 +40,4 @@ data "aws_ami" "java_packer_image" {
   }
   owners = ["self"]
 
-}
+}*/
