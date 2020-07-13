@@ -40,12 +40,12 @@ variable "nginx-proxy-subnet-cidr" {
   description = "nginx-proxy-subnet-cidr"
 }
 
-variable "private-subnet_1-cidr" {
+variable "public-subnet_3-cidr" {
   default     = "172.28.24.0/24"
-  description = "private-subnet_1-cidr"
+  description = "public-subnet_3-cidr"
 }
 
-variable "private-subnet_2-cidr" {
+variable "public-subnet_3-cidr" {
   default     = "172.28.32.0/24"
   description = "private-subnet_2-cidr"
 }

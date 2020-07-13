@@ -90,13 +90,23 @@ output "app_machines_private_ips" {
 }
 
 
-output "app_server_ips" {
-  
+output "app_server_private_ips" {
+
   value = {
-    
-    for instance in aws_instance.app_machine:
+
+    for instance in aws_instance.app_machine :
     instance.tags.Name => instance.private_ip
-    
+
+  }
+}
+
+output "app_server_public_ips" {
+
+  value = {
+
+    for instance in aws_instance.app_machine :
+    instance.tags.Name => instance.public_ip
+
   }
 }
 

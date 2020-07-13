@@ -72,6 +72,15 @@ resource "aws_route_table_association" "route-B-pub" {
 
 }
 
+resource "aws_route_table_association" "route-C-pub" {
+  subnet_id      = aws_subnet.public_3.subnet_id
+  route_table_id = aws_route_table.routetb_A_public.id
+}
+
+resource "aws_route_table_association" "route-D-pub" {
+  subnet_id      = aws_subnet.public_4.subnet_id
+  route_table_id = aws_route_table.routetb_A_public.id
+}
 
 ##############################################
 ##            Security Groups               ##
@@ -151,7 +160,7 @@ resource "aws_security_group" "group_2" {
 
   }
 
-    /*ingress {
+  /*ingress {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
@@ -174,7 +183,7 @@ resource "aws_security_group" "group_2" {
     cidr_blocks = ["172.28.16.0/24"]
   }*/
 
-  
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -200,17 +209,17 @@ resource "aws_security_group" "group_3" {
   }*/
 
   ingress {
-    from_port = 8080
-    to_port   = 8080
-    protocol  = "tcp"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
     cidr_blocks = [var.nginx-proxy-subnet-cidr]
-    
+
   }
 
   ingress {
-    from_port = 22
-    to_port   = 22
-    protocol  = "tcp"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = [var.jenkins-subnet-cidr]
   }
 
@@ -218,8 +227,9 @@ resource "aws_security_group" "group_3" {
     from_port   = 0
     to_port     = 0
     protocol    = -1
-    cidr_blocks = [var.vpc-cidr]
-    
+    cidr_blocks = ["0.0.0.0/0"]
+    #cidr_blocks = [var.vpc-cidr]
+
   }
 
   /*depends_on = [

@@ -3,7 +3,7 @@ locals {
 }
 
 locals {
-  subs_pri = concat([aws_subnet.private_1.id], [aws_subnet.private_2.id])
+  subs_pub = concat([aws_subnet.public_3.id], [aws_subnet.public_4.id])
 }
 
 locals {
