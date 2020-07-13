@@ -6,8 +6,6 @@ pipeline {
             AWS_SECRET_ACCESS_KEY = credentials ('AWS_SECRET_ACCESS_KEY')
             CURRENT_LIVE_BOX = 'None'
             //env.CURRENT_LIVE_BOX_1 = 'None'
-
-
         }
      
       // Get code from a GitHub repository //
@@ -52,6 +50,15 @@ pipeline {
             sh 'terraform apply -auto-approve'
 	         echo 'deployment complete'
          }
+      }
+
+      stage("Write-File") {
+         steps {
+             echo CURRENT_LIVE_BOX
+                script {
+                    writeFile(file:'/var/lib/jenkins/env_vars/Live_Box.txt', text: 'No-Box')
+                }
+          }
       }
 
    }
