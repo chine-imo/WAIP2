@@ -15,14 +15,14 @@ resource "aws_instance" "app_machine" {
     Name = var.instance_names[count.index]
   }
 
-    connection {
+  /*  connection {
     type        = "ssh"
     user        = "ec2-user"
     private_key = file(var.private_key)
     host        = self.public_ip
-  }
+  }*/
 
-  provisioner "remote-exec" {
+  /*provisioner "remote-exec" {
     inline = [
       "sudo yum update -y",
       "sudo yum install -y java-1.8.0-openjdk-devel",
@@ -32,7 +32,7 @@ resource "aws_instance" "app_machine" {
       "sudo usermod -aG wheel jenkins",
       "sudo usermod --shell /bin/bash jenkins"      
     ]
-  }
+  }*/
 
 
 

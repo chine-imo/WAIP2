@@ -10,14 +10,14 @@ resource "aws_instance" "nginx" {
     Name = "proxy-nginx-server"
   }
 
-  connection {
+  /*connection {
     type        = "ssh"
     user        = "ec2-user"
     private_key = file("~/.ssh/terraform2.pem")
     host        = self.public_ip
-  }
+  }*/
 
-  provisioner "remote-exec" {
+  /*provisioner "remote-exec" {
     inline = [
       "sudo yum update -y",
       "sudo amazon-linux-extras install nginx1.12 -y",
@@ -32,7 +32,7 @@ resource "aws_instance" "nginx" {
       "sudo cp /etc/nginx/nginx.conf blue-conf/nginx.conf"
     ]
 
-  }
+  }*/
 
 }
 
