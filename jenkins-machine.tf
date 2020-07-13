@@ -39,7 +39,7 @@ resource "aws_instance" "jenkins" {
        "wget https://releases.hashicorp.com/terraform/0.12.26/terraform_0.12.26_linux_amd64.zip",
        "sudo unzip terraform_0.12.26_linux_amd64.zip -d /usr/bin",
        "sudo echo 'export PATH=/usr/bin/terraform:$PATH' >> ~/.bashrc",
-       "source .bashrc",
+       "source ~/.bashrc"
        "sudo mkdir /var/lib/jenkins/env_vars", 
        "sudo usermod --shell /bin/bash jenkins",
        "sudo usermod -aG wheel jenkins",
