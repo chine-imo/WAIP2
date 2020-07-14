@@ -38,8 +38,10 @@
                 "sudo usermod -aG wheel jenkins",
                 "sudo usermod --shell /bin/bash jenkins",
                 "sudo mkdir /etc/nginx/red-conf",
+                "sudo chown jenkins:jenkins /etc/nginx/red-conf",
                 "sudo cp /etc/nginx/nginx.conf red-conf/nginx.conf",
                 "sudo mkdir /etc/nginx/blue-conf",
+                "sudo chown jenkins:jenkins /etc/nginx/blue-conf",                
                 "sudo cp /etc/nginx/nginx.conf blue-conf/nginx.conf"
               ]
           }
