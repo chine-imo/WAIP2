@@ -29,8 +29,18 @@
               "type": "shell",
               "inline": [
                 "sudo yum update -y",
+                "sudo yum update -y",
                 "sudo yum install -y yum-utils",
-                "sudo amazon-linux-extras install nginx1.12 -y"
+                "sudo amazon-linux-extras install nginx1.12 -y",
+                "sudo systemctl enable nginx",
+                "sudo systemctl start nginx",
+                "sudo useradd -d /var/lib/jenkins jenkins",
+                "sudo usermod -aG wheel jenkins",
+                "sudo usermod --shell /bin/bash jenkins",
+                "sudo mkdir /etc/nginx/red-conf",
+                "sudo cp /etc/nginx/nginx.conf red-conf/nginx.conf",
+                "sudo mkdir /etc/nginx/blue-conf",
+                "sudo cp /etc/nginx/nginx.conf blue-conf/nginx.conf"
               ]
           }
       ]
