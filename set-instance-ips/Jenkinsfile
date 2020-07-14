@@ -30,8 +30,8 @@ pipeline {
              //echo CURRENT_LIVE_BOX
              sh '''
              terraform output proxy_server_private_ip > /var/lib/jenkins/env_vars/Nginx_Box_ip.txt
-             terraform output -json app_server_private_ips3 | jq '.["Blue-Box"]' --raw-output > /var/lib/jenkins/env_vars/Blue_Box_ip.txt                
-             terraform output -json app_server_private_ips3 | jq '.["Red-Box"]' --raw-output > /var/lib/jenkins/env_vars/Red_Box_ip.txt
+             terraform output -json app_server_private_ips3 | jq '."Blue-Box"' --raw-output > /var/lib/jenkins/env_vars/Blue_Box_ip.txt                
+             terraform output -json app_server_private_ips3 | jq '."Red-Box"' --raw-output > /var/lib/jenkins/env_vars/Red_Box_ip.txt
              '''
          }
       }      
