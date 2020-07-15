@@ -60,6 +60,7 @@ pipeline {
                     writeFile(file:'/var/lib/jenkins/env_vars/Red_Box_ip.txt', text: 'Red-IP')
                     writeFile(file:'/var/lib/jenkins/env_vars/Blue_Box_ip.txt', text: 'Blue-IP')
                     writeFile(file:'/var/lib/jenkins/env_vars/Nginx_Box_ip.txt', text: 'Nginx-IP')
+                    writeFile(file:'/var/lib/jenkins/env_vars/SwitchTraffic.txt', text: 'Box')
                 }
                 sh '''
                 sudo chown jenkins:jenkins /var/lib/jenkins/env_vars/Live_Box.txt
@@ -70,6 +71,8 @@ pipeline {
                 sudo chmod 600 /var/lib/jenkins/env_vars/Blue_Box_ip.txt
                 sudo chown jenkins:jenkins /var/lib/jenkins/env_vars/Nginx_Box_ip.txt
                 sudo chmod 600 /var/lib/jenkins/env_vars/Nginx_Box_ip.txt
+                sudo chown jenkins:jenkins /var/lib/jenkins/env_vars/SwitchTraffic.txt
+                sudo chmod 600 /var/lib/jenkins/env_vars/SwitchTraffic.txt
                 '''
           }
       }      
