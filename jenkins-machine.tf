@@ -33,6 +33,7 @@ resource "aws_instance" "jenkins" {
        "sudo echo 'export PATH=$MAVEN_HOME/bin:$PATH' >> ~/.bashrc",
        "sudo echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc",
        "sudo yum install -y jenkins",
+       "sudo yum instal -y jq",
        "wget https://releases.hashicorp.com/packer/1.6.0/packer_1.6.0_linux_amd64.zip",
        "sudo unzip packer_1.6.0_linux_amd64.zip -d /usr/bin",
        "sudo echo 'export PATH=/usr/bin/packer:$PATH' >> ~/.bashrc",
